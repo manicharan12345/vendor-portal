@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <h1>Invoice Dashboard</h1><br>
+<script type='module'
+    src='https://prod-apnortheast-a.online.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js'>
+</script>
+<tableau-viz id='tableau-viz'
+    src='https://prod-apnortheast-a.online.tableau.com/t/supervityv1/views/Assignedvscompleted/DummyDashboard/43b865fc-1a6f-41a8-a0af-90332aca05f5/58e609f7-dbe6-44e4-a3d2-a5b806d5c6e4'
+    width='1000' height='840' hide-tabs toolbar='bottom'>
+</tableau-viz>
+</div>
+</div>
+
+<br><br><br><br><br><br><br><br>
+
+{% endblock %}
+

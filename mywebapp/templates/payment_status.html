@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<header class="py-5" style="background-image: url('/static/assets/bg.png'); background-size: cover; background-position: center; position: relative;">
+    <div class="container px-4 px-lg-5 my-3">
+        <div class="text-center text-dark">
+            <h1 class="display-4 fw-bolder">Check Payment Status</h1>
+        </div>
+    </div>
+    <img src="/static/assets/women.png" alt="Women Photo" style="position: absolute; top: 50%; right: 20px; transform: translateY(-50%); width: 160px;">
+</header>
+
+<div class="container mt-5">
+    <form method="post" class="needs-validation" novalidate autocomplete="off">
+        {% csrf_token %}
+        <div class="mb-3" style="width: 500px;">
+            <label for="invoice_no" class="form-label">Enter Invoice No:</label>
+            <input type="text" class="form-control" id="invoice_no" name="invoice_no" required>
+            <div class="invalid-feedback">
+                Please provide an invoice number.
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Search</button>
+    </form>
+    {% if payment_status %}
+    <div class="mt-3">
+        <strong>Payment Status:</strong>
+        {% if payment_status == "Paid" %}
+            <p>Already paid. Kindly please check your accounts.</p>
+        {% elif payment_status == "Pending" %}
+            <p>Invoice pending with Accounts payable for approval. We will intimate you through mail once approved.</p>
+        {% else %}
+            <p>{{ payment_status }}</p>  <!-- Display the payment status if it's neither "Paid" nor "Pending" -->
+        {% endif %}
+    </div>
+    {% endif %}
+    {% if error_message %}
+        <div class="mt-3">
+            <p class="text-danger">{{ error_message }}</p>
+        </div>
+    {% endif %}
+</div><br><br><br><br><br><br><br><br>
+
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<header class="py-5" style="background-image: url('/static/assets/bg.png'); background-size: cover; background-position: center; position: relative;">
+    <div class="container px-4 px-lg-5 my-3">
+        <div class="text-center text-dark">
+            <h1 class="display-4 fw-bolder">Add Invoice</h1>
+        </div>
+    </div>
+    <img src="/static/assets/women.png" alt="Women Photo" style="position: absolute; top: 50%; right: 20px; transform: translateY(-50%); width: 190px;">
+</header>
+  <div class="container mt-5">
+    <form method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+      {% csrf_token %}
+      <div class="mb-3">
+        <strong>{{ form.invoice_no.label_tag }}</strong>
+        {{ form.invoice_no }}
+        <div class="invalid-feedback">
+          Please provide an invoice number.
+        </div>
+      </div>
+      <div class="mb-3">
+        <strong>{{ form.invoice_date.label_tag }}</strong>
+        {{ form.invoice_date }}
+        <div class="invalid-feedback">
+            Please provide a valid Due date
+        </div>
+      </div>
+      <div class="mb-3">
+        <strong>{{ form.amount.label_tag }}</strong>
+        {{ form.amount }}
+      </div>
+      <div class="mb-3">
+        <strong>{{ form.payment_status.label_tag }}</strong>
+        {{ form.payment_status }}
+      </div>
+      <div class="mb-3">
+        <strong>{{ form.payment_date.label_tag }}</strong>
+        {{ form.payment_date }}
+      </div>
+      <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+  </div>
+  <br><br><br><br><br><br><br><br>
+
+{% endblock %}

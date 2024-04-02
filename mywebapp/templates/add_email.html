@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-3">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Add Email</h1>
+        </div>
+    </div>
+</header><br><br><br><br>
+
+  <div class="container">
+    <center>
+    <!-- <h2 class="mb-4">Add Email</h2> -->
+    <form method="post" class="needs-validation" novalidate>
+      {% csrf_token %}
+      <div class="mb-3">
+        <strong>{{ form.address.label_tag }}</strong>
+        {{ form.address }}
+        <div class="invalid-feedback">
+          Please provide a valid email address.
+        </div>
+      </div>
+      <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+    </center>
+  </div>
+
+  <br><br><br><br><br><br><br><br><br><br><br><br><br>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<header class="py-5" style="background-image: url('/static/assets/bg.png'); background-size: cover; background-position: center; position: relative;">
+    <div class="container px-4 px-lg-5 my-3">
+        <div class="text-center text-dark">
+            <h1 class="display-4 fw-bolder">Edit Your Profile</h1>
+        </div>
+    </div>
+    <img src="/static/assets/women.png" alt="Women Photo" style="position: absolute; top: 50%; right: 20px; transform: translateY(-50%); width: 160px;">
+</header>
+
+<div class="container mt-5">
+    <form method="post" enctype="multipart/form-data" class="needs-validation" novalidate autocomplete="off">
+        {% csrf_token %}
+        <!-- <div class="mb-3">
+            <strong>{{ form.vendor_id.label_tag }}</strong>
+            {{ form.vendor_id }}
+        </div>
+        <div class="mb-3">
+            <strong>{{ form.Vendor_Name.label_tag }}</strong>
+            {{ form.Vendor_Name }}
+        </div> -->
+        <div class="mb-3" style="width: 500px;">
+            <strong>{{ form.Vendor_Address.label_tag }}</strong>
+            {{ form.Vendor_Address }}
+        </div>
+        <div class="mb-3" style="width: 500px;">
+            <strong>{{ form.Contact_no.label_tag }}</strong>
+            {{ form.Contact_no }}
+        </div>
+        <div class="mb-3" style="width: 500px;">
+            <strong>{{ form.gst_details.label_tag }}</strong>
+            {{ form.gst_details }}
+        </div>
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+</div>
+
+<br><br><br><br><br><br><br><br>
+
+{% endblock %}

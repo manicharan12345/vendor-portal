@@ -1,0 +1,70 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'assets/supervity_logo.png' %}" alt="Your Logo" width="30" height="30" class="d-inline-block align-text-top">&nbsp;<strong>Supervity</strong></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                <!-- <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'add_invoice' %}">Update invoice</a></li> -->
+                <!-- <li class="nav-item"><a class="nav-link" href="{% url 'invoicedashboard' %}">Invoice Dashboard</a></li> -->
+                
+                
+            </ul>
+            <!-- <form class="d-flex">
+                <a class="btn btn-outline-dark" href="#!">
+                    <i class="bi-cart-fill me-1"></i>
+                    Cart
+                    <span class="badge bg-dark text-white ms-1 rounded-pill" id="cart_quantity">0</span>
+                </a>
+            </form> -->
+        </div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto">
+                {% if user.is_authenticated %}
+                    <a class="navbar-brand" href="{% url 'upload_invoice' %}" style="color: blue;" title="Upload Invoice">
+                        <img src="{% static 'assets/uploadinvoicelogo.png' %}" alt="Your Logo" width="30" height="30" class="d-inline-block align-text-top">
+                        &nbsp;Upload Invoice
+                    </a>
+                    <a class="navbar-brand" href="{% url 'payment_status' %}" style="color: blue;" title="Payment Status">
+                        <img src="{% static 'assets/status.jfif' %}" alt="Your Logo" width="30" height="30" class="d-inline-block align-text-top">
+                        &nbsp;Payment Status
+                    </a>
+                    <a class="navbar-brand" href="{% url 'issue_tickets' %}" style="color: blue;" title="Support Ticket">
+                        <img src="{% static 'assets/support_ticket.png' %}" alt="Your Logo" width="30" height="30" class="d-inline-block align-text-top">
+                        &nbsp;Support Ticket
+                    </a>
+                    <a class="navbar-brand" href="{% url 'add_vendor_details' %}" style="color: blue;" title="Edit Profile">
+                        <img src="{% static 'assets/editprofile.png' %}" alt="Your Logo" width="30" height="30" class="d-inline-block align-text-top">
+                        &nbsp;Edit Profile
+                    </a>
+                    <a class="navbar-brand" href="{% url 'logout' %}" style="color: blue;" title="Logout">
+                        <img src="{% static 'assets/logout.png' %}" alt="Your Logo" width="30" height="30" class="d-inline-block align-text-top">
+                        &nbsp;Logout
+                    </a>
+                
+                    <!-- <li class="nav-item "><a class="nav-link active" aria-current="page" href="">Payment Status</a></li>
+                    <li class="nav-item "><a class="nav-link active" aria-current="page" href="{% url 'issue_tickets' %}">Support Ticket</a></li>
+                    <li class="nav-item "><a class="nav-link active" aria-current="page" href="{% url 'add_vendor_details' %}">Edit Profile</a></li> -->
+                    <!-- <li class="nav-item "><a class="nav-link active" aria-current="page" href="{% url 'logout' %}">Logout</a></li> -->
+                {% else %}
+                    <li class="nav-item">
+                        <a type="button" class="btn btn-primary" href="{% url 'login' %}">Login</a>
+                    </li>
+                    <!-- <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'login' %}">Login</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'register' %}">Register</a></li> -->
+                {% endif %}
+            </ul>    
+        </div>
+    </div>
+</nav>
+
+<!-- <script>
+let dropdowns = document.querySelectorAll('.dropdown-toggle')
+dropdowns.forEach((dd)=>{
+    dd.addEventListener('click', function (e) {
+        var el = this.nextElementSibling
+        el.style.display = el.style.display==='block'?'none':'block'
+    })
+})
+
+</script> -->

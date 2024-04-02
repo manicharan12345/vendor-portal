@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-3">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Add Client</h1>
+        </div>
+    </div>
+</header>
+<div class="container mt-5">
+    <form method="post" class="needs-validation" novalidate>
+      {% csrf_token %}
+      <div class="mb-3">
+        <strong>{{ form.name.label_tag }}</strong>
+        {{ form.name }}
+        <div class="invalid-feedback">
+          Please provide a client name.
+        </div>
+      </div>
+      <div class="mb-3">
+        <strong>{{ form.to_email_ids.label_tag }}</strong>
+        {{ form.to_email_ids }}
+      </div>
+      <div class="mb-3">
+        <strong>{{ form.cc_mail_ids.label_tag }}</strong>
+        {{ form.cc_mail_ids }}
+      </div>
+      <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('.select2').select2();
+    });
+  </script>
+
+  <!-- <div class="container mt-5">
+    <form method="post" class="needs-validation" novalidate>
+      {% csrf_token %}
+      <div class="mb-3">
+        <strong>{{ form.name.label_tag }}</strong>
+        {{ form.name }}
+        <div class="invalid-feedback">
+          Please provide a client name.
+        </div>
+      </div>
+      <div class="mb-3">
+        <strong>{{ form.to_email_ids.label_tag }}</strong>
+        {{ form.to_email_ids }}
+      </div>
+      <div class="mb-3">
+        <strong>{{ form.cc_mail_ids.label_tag }}</strong>
+        {{ form.cc_mail_ids }}
+      </div>
+      <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+  </div> -->
+  
+  <br><br><br><br><br><br><br><br>
+{% endblock %}
