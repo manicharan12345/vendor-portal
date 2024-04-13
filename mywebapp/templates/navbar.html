@@ -23,13 +23,14 @@
   <aside class="sidebar">
     <div class="sidebar-start">
         <div class="sidebar-head">
-            <a href="/" class="logo-wrapper" title="Home">
+            <a href="{% url 'home' %}" class="logo-wrapper" title="Home">
                 <span class="sr-only">Home</span>
                 <!-- <span class="icon logo" aria-hidden="true"></span> -->
                 <img src="{% static 'assets/supervity_logo.png' %}" alt="Supervity Logo" class="logo">
                 <div class="logo-text">
                     <span class="logo-title">Supervity</span>
                     <span class="logo-subtitle">Vendor Portal</span>
+                    <span class="logo-subtitle">{{ request.user.first_name }} {{ request.user.last_name }}</span>
                 </div>
 
             </a>
@@ -67,6 +68,12 @@
                       Edit Profile
                     </a>
                 </li>
+                <!-- <li>
+                  <a href="{% url 'add_PO2' %}">
+                    <img src="{% static 'assets/editprofile.png' %}" alt="Upload Invoice" class="icon" aria-hidden="true" style="width: 20px; height: 20px; filter: invert(100%) contrast(250%); font-weight: bold; ">  
+                    ADD PO
+                  </a>
+              </li> -->
             </ul>
             
         </div>

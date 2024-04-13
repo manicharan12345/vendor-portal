@@ -29,6 +29,7 @@
                 <div class="logo-text">
                     <span class="logo-title">Supervity</span>
                     <span class="logo-subtitle">Vendor Portal</span>
+                    <span class="logo-subtitle">{{ request.user.first_name }} {{ request.user.last_name }}</span>
                 </div>
 
             </a>
@@ -66,6 +67,12 @@
                       Edit Profile
                     </a>
                 </li>
+                <!-- <li>
+                  <a href="{% url 'add_PO2' %}">
+                    <img src="{% static 'assets/editprofile.png' %}" alt="Upload Invoice" class="icon" aria-hidden="true" style="width: 20px; height: 20px; filter: invert(100%) contrast(250%); font-weight: bold; ">  
+                    ADD PO
+                  </a>
+              </li> -->
             </ul>
             
         </div>
@@ -184,8 +191,8 @@
                 <i data-feather="bar-chart-2" aria-hidden="true"></i>
               </div>
               <div class="stat-cards-info">
-                <p class="stat-cards-info__num">$ {{ sum_of_pending_amount }}</p>
-                <p class="stat-cards-info__title">Total outstanding</p>
+                <p class="stat-cards-info__num">$ 870</p>
+                <p class="stat-cards-info__title">Outstanding Value</p>
                 <!-- <p class="stat-cards-info__progress">
                   <span class="stat-cards-info__profit success">
                     <i data-feather="trending-up" aria-hidden="true"></i>4.07%
@@ -201,7 +208,7 @@
                 <i data-feather="file" aria-hidden="true"></i>
               </div>
               <div class="stat-cards-info">
-                <p class="stat-cards-info__num">{{ count_of_pending_invoices }}</p>
+                <p class="stat-cards-info__num">2</p>
                 <p class="stat-cards-info__title">Open Invoice</p>
                 <!-- <p class="stat-cards-info__progress">
                   <span class="stat-cards-info__profit success">
@@ -218,8 +225,25 @@
                 <i data-feather="file" aria-hidden="true"></i>
               </div>
               <div class="stat-cards-info">
-                <p class="stat-cards-info__num">{{ count_of_records_with_null_invoice }}</p>
+                <p class="stat-cards-info__num">2</p>
                 <p class="stat-cards-info__title">Open PO</p>
+                <!-- <p class="stat-cards-info__progress">
+                  <span class="stat-cards-info__profit danger">
+                    <i data-feather="trending-down" aria-hidden="true"></i>1.64%
+                  </span>
+                  Last month
+                </p> -->
+              </div>
+            </article>
+          </div>
+          <div class="col-md-6 col-xl-3">
+            <article class="stat-cards-item">
+              <div class="stat-cards-icon purple">
+                <i data-feather="file" aria-hidden="true"></i>
+              </div>
+              <div class="stat-cards-info">
+                <p class="stat-cards-info__num">$ 1270</p>
+                <p class="stat-cards-info__title">Open PO Value</p>
                 <!-- <p class="stat-cards-info__progress">
                   <span class="stat-cards-info__profit danger">
                     <i data-feather="trending-down" aria-hidden="true"></i>1.64%
@@ -249,49 +273,115 @@
         </div>
         <div class="row">
           <div class="col-lg-12">
-            <div class="chart">
-              <canvas id="myChart" aria-label="Site statistics" role="img"></canvas>
-            </div>
-            <div class="users-table table-wrapper">
-              <table class="posts-table">
-                <thead>
-                  <tr class="users-table-info">
-                    <th>S.No
-                      <!-- <label class="users-table__checkbox ms-20">
-                        <input type="checkbox" class="check-all">Thumbnail
-                      </label> -->
-                    </th>
-                    <th>Invoice No</th>
-                    <th>PO no</th>
-                    <th>Invoice Date</th>
-                    <th>Amount</th>
-                    <th>Payment Status</th>
-                    <th>Payment Duedate</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {% for invoice in invoices %}
-                    <tr>
-                      <th scope="row">{{ invoice.id }}</th>
-                      <td>{{ invoice.invoice_no }}</td>
-                      <td>{{ invoice.po_no }}</td>
-                      <td>{{ invoice.invoice_date }}</td>
-                      <td>$ {{ invoice.amount }}</td>
-                      <td>{{ invoice.payment_status }}</td>
-                      <td>{{ invoice.payment_date|default:"-" }}</td>
-                      <td><button class="view-pdf-btn" data-invoice-id="{{ invoice.id }}">View PDF</button></td>
-                    </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
-            </div>
+              <div class="chart">
+                  <canvas id="myChart" aria-label="Site statistics" role="img"></canvas>
+              </div>
+              <center>
+                <h1>INVOICE DETAILS</h1><br><br>
+              </center>
+              <div class="users-table table-wrapper">
+                  <style>
+                      .table-scrollable {
+                          overflow-x: auto;
+                          max-height: 300px;
+                          max-width: 100%; /* Set the maximum width of the table wrapper */
+                      }
+                      .posts-table thead th {
+                          position: sticky;
+                          top: 0;
+                          background-color: #ccc; /* Optional: Set the background color of the header */
+                          z-index: 1; /* Ensure the header stays above the table content */
+                      }
+                  </style>
+                  <div class="table-responsive"> <!-- Add this div for responsive scrolling -->
+                      <div class="table-scrollable"> <!-- Add a wrapper for horizontal scrolling -->
+                          <table class="posts-table table">
+                              <thead>
+                                  <tr class="users-table-info">
+                                      <!-- <th>S.No</th> -->
+                                      <th>Invoice No</th>
+                                      <th>PO No</th>
+                                      <th>Invoice Date</th>
+                                      <th>Amount</th>
+                                      <th>Payment Status</th>
+                                      <th>Payment Due Date</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  {% for invoice in invoices %}
+                                    <tr>
+                                        <!-- <th scope="row">{{ invoice.id }}</th> -->
+                                        <td>{{ invoice.invoice_no }}</td>
+                                        <td>{{ invoice.po_no }}</td>
+                                        <td>{{ invoice.invoice_date }}</td>
+                                        <td>$ {{ invoice.amount }}</td>
+                                        <td>{{ invoice.payment_status }}</td>
+                                        <td>{{ invoice.payment_date|default:"-" }}</td>
+                                    </tr>
+                                  {% endfor %}
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
           </div>
-          <!-- <div class="col-lg-3">
-            <article class="customers-wrapper">
-              <canvas id="customersChart" aria-label="Customers statistics" role="img"></canvas>
-            </article> 
-          </div> -->
+      </div>
+      
+      
+
+        <center>
+        <h1>PURCHASE ORDER DETAILS</h1><br><br>
+      </center>
+      <div class="row">
+        <div class="col-lg-12">
+            <!-- <div class="chart">
+                <canvas id="myChart" aria-label="Site statistics" role="img"></canvas>
+            </div> -->
+            <div class="users-table table-wrapper">
+                <style>
+                    .table-scrollable {
+                        overflow-x: auto;
+                        max-height: 300px;
+                        max-width: 100%; /* Set the maximum width of the table wrapper */
+                    }
+                    .posts-table thead th {
+                        position: sticky;
+                        top: 0;
+                        background-color: #ccc; /* Change the background color to grey */
+                        z-index: 1; /* Ensure the header stays above the table content */
+                    }
+                </style>
+                <div class="table-responsive"> <!-- Add this div for responsive scrolling -->
+                    <div class="table-scrollable"> <!-- Add a wrapper for horizontal scrolling -->
+                        <table class="posts-table table">
+                            <thead>
+                                <tr class="users-table-info">
+                                    <!-- <th>S.No</th> -->
+                                    <th>PO No</th>
+                                    <th>PO Date</th>
+                                    <th>PO Amount</th>
+                                    <th>PO File</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for po_record in po_records %}
+                                  <tr>
+                                      <!-- <th scope="row">{{ po_record.id }}</th> -->
+                                      <td>{{ po_record.purchase_order_no }}</td>
+                                      <td>{{ po_record.purchase_order_date }}</td>
+                                      <td>$ {{ po_record.po_amount }}</td>
+                                      <!-- <td></td> -->
+                                      <td><a class="pdf-preview-link" href="{% url 'preview_pdf2' po_record.id %}" target="_blank">Preview PDF</a></td>
+                                  </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
+    
         <!-- <div class="row">
           <div class="col-lg-9">
             <div class="chart">
@@ -552,6 +642,40 @@
 <script src="{% static 'plugins/feather.min.js' %}"></script>
 <!-- Custom scripts -->
 <script src="{% static 'js/script.js' %}"></script>
+<!-- Include Turn.js CSS and JavaScript -->
+<link rel="stylesheet" href="{% static 'turnjs/turn.min.css' %}">
+<script src="{% static 'turnjs/turn.min.js' %}"></script>
+
+<!-- Add a div for the flipbook -->
+<div id="flipbook">
+    <iframe id="pdf-iframe" src="" width="100%" height="100%" style="border: none;"></iframe>
+</div>
+
+<!-- JavaScript to initialize Turn.js -->
+<script>
+    // Wait for the document to be ready
+    $(document).ready(function() {
+        // Initialize Turn.js with the flipbook div
+        $('#flipbook').turn({
+            width: '100%',
+            height: 600,
+            autoCenter: true
+        });
+
+        // Function to load PDF into iframe
+        function loadPDF(pdfUrl) {
+            $('#pdf-iframe').attr('src', pdfUrl);
+        }
+
+        // Event listener for link click to load PDF
+        $('.pdf-preview-link').on('click', function(e) {
+            e.preventDefault();
+            var pdfUrl = $(this).attr('data-pdf-url');
+            loadPDF(pdfUrl);
+        });
+    });
+</script>
+
 </body>
 
 </html>

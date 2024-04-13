@@ -54,4 +54,11 @@ class POTable(models.Model):
     def __str__(self):
         return f"{self.purchase_order_no}"
 
+class POTable2(models.Model):
+    purchase_order_no = models.CharField('Purchase order no',max_length=100)
+    purchase_order_date = models.DateField('Purchase order date')
+    po_amount=models.DecimalField(default=0,max_digits=20,decimal_places=2)
+    link = models.FileField(upload_to='invoice_copies/', blank=True, null=True,)
 
+    def __str__(self):
+        return f"{self.purchase_order_no}"

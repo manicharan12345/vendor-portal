@@ -4,7 +4,7 @@ from django import forms
 
 from django.forms import ModelForm
 from django import forms
-from .models import InvoiceStatusTable, POTable,VendorMasterTable,IssueTicket
+from .models import InvoiceStatusTable, POTable,VendorMasterTable,IssueTicket,POTable2
 
 
 
@@ -117,5 +117,14 @@ class POTableForm(forms.ModelForm):
             'link': forms.ClearableFileInput(attrs={'class': 'form-control'}),
         }
 
-
+class POTableForm2(forms.ModelForm):
+    class Meta:
+        model = POTable2
+        fields = ['purchase_order_no', 'purchase_order_date','po_amount', 'link']
+        widgets = {
+            'purchase_order_no': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Purchase Order No'}),
+            'purchase_order_date': forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'yyyy-mm-dd'}),
+            'po_amount': forms.NumberInput(attrs={'class': 'form-control'}),
+            'link': forms.ClearableFileInput(attrs={'class': 'form-control'}),
+        }
 
